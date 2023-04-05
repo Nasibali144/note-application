@@ -1,9 +1,10 @@
 import 'dart:html';
 import '../../tools/base_screen.dart';
+import '../../tools/network.dart';
 
 class HomePage extends BaseScreen {
   @override
-  void build() {
+  void build() async {
     final navbar = Element.nav();
     navbar.style.backgroundColor = "#8BC34A";
     navbar.style.width = "100%";
@@ -31,6 +32,9 @@ class HomePage extends BaseScreen {
     final test = HeadingElement.h1();
     test.text = "Home Page";
 
+
     document.body!.children.addAll([navbar, test]);
+
+
   }
 }

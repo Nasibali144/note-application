@@ -1,6 +1,9 @@
 import 'dart:html';
 import '../../main.dart';
+import '../../models/user_model.dart';
 import '../../tools/base_screen.dart';
+import '../../tools/network.dart';
+import '../home/home_page.dart';
 import '../sign_in/sign_in_page.dart';
 
 class SignUpPage extends BaseScreen {
@@ -83,11 +86,36 @@ class SignUpPage extends BaseScreen {
       submitButton
     ];
 
-    submitButton.onClick.listen((event) {
+    submitButton.onClick.listen((event) async {
       print("On change");
-      print(emailInput.value);
-      print(passwordInput.value);
-      controller.navigateToPage(list: [navbar, form], screen: SignInPage());
+      String email = emailInput.value!;
+      String password = passwordInput.value!;
+
+      if(email.isNotEmpty && password.isNotEmpty) {
+        User user = User(DateTime.now().millisecondsSinceEpoch, "web", "imageUrl", email, password, "id");
+        final http = Network();
+        print("Worked");
+
+        HttpRequest.request("https://642ce05cbf8cbecdb4f8cec2.mockapi.io/api/v2/users", method: "POST", sendData: {
+          "createdAt": 1680662713,
+          "name": "Nasibali",
+          "imageUrl": "https://cloudflare-ipfs.com/ipfs/Qmd3W5DuhgHirLHGVixi6V76LhCkZUz6pnFt5AJBiyvHye/avatar/184.jpg",
+          "email": "email@gmail.com",
+          "password": "qwert1234",
+        }, requestHeaders: {"Content-type": "application/json; charset=UTF-8"}).then((response)  {
+          print(response.responseText);
+        });
+        // http.post(Api.baseUrl, Api.users.path, user.toJson()).then((value) {
+        //   print(value);
+        //   controller.navigateToPage(list: [navbar, form], screen: HomePage());
+        // });
+      }
+
+      // controller.navigateToPage(list: [navbar, form], screen: SignInPage());
+      // final text = await HttpRequest.request("/users", method: "GET", requestHeaders: {"Content-type": "application/json; charset=UTF-8"}).then((response) => response.responseText!);
+
+
+
     });
 
     document.body!.children.addAll([navbar, form]);
