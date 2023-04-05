@@ -12,7 +12,14 @@ class AppController {
   }
 
   /// For Navigate
-  void navigateToPage(String url) {
-    window.location.href = url;
+  // void navigateToPage(String url) {
+  //   window.location.href = url;
+  // }
+
+  void navigateToPage({required List<Element> list, required BaseScreen screen}) {
+    for(final element in list) {
+      element.remove();
+    }
+    screen;
   }
 }

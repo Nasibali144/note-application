@@ -1,5 +1,7 @@
 import 'dart:html';
+import '../../main.dart';
 import '../../tools/base_screen.dart';
+import '../home/home_page.dart';
 
 class SignInPage extends BaseScreen {
   @override
@@ -20,7 +22,7 @@ class SignInPage extends BaseScreen {
     title.style.paddingRight = "10px";
 
     final pageTitle = HeadingElement.h1();
-    pageTitle.text = "Sign Up";
+    pageTitle.text = "Sign In";
     pageTitle.style.color = "white";
     pageTitle.style.size = "25px";
     pageTitle.style.margin = "0";
@@ -63,7 +65,7 @@ class SignInPage extends BaseScreen {
     passwordInput.placeholder = "Enter your password";
 
     final submitButton = ButtonElement();
-    submitButton.text = "Sign Up";
+    submitButton.text = "Sign In";
     submitButton.style.fontSize = "20px";
     submitButton.style.marginTop = "20px";
     submitButton.style.padding = "10px";
@@ -85,6 +87,7 @@ class SignInPage extends BaseScreen {
       print("On change");
       print(emailInput.value);
       print(passwordInput.value);
+      controller.navigateToPage(list: [navbar, form], screen: HomePage());
     });
 
     document.body!.children.addAll([navbar, form]);

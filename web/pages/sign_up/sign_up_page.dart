@@ -1,5 +1,7 @@
 import 'dart:html';
+import '../../main.dart';
 import '../../tools/base_screen.dart';
+import '../sign_in/sign_in_page.dart';
 
 class SignUpPage extends BaseScreen {
   @override
@@ -81,10 +83,11 @@ class SignUpPage extends BaseScreen {
       submitButton
     ];
 
-    form.onChange.listen((event) {
+    submitButton.onClick.listen((event) {
       print("On change");
       print(emailInput.value);
       print(passwordInput.value);
+      controller.navigateToPage(list: [navbar, form], screen: SignInPage());
     });
 
     document.body!.children.addAll([navbar, form]);
